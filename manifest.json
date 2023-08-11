@@ -6,6 +6,5 @@
     "background_color": "#fdfdfd",
     "theme_color": "#db4938",
     "orientation": "portrait-primary",
-    "icons": [],
-    "prefer_related_applications": false
+    "icons": []
   }

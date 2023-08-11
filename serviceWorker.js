@@ -10,6 +10,7 @@ self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
     caches.open(staticHorseCalendar).then(cache => {
       cache.addAll(assets)
+      console.log(assets);
     })
   )
 })

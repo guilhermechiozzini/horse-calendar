@@ -8,7 +8,7 @@
     "orientation": "portrait-primary",
     "icons": [
       {
-        "src": "/horse.png",
+        "src": "/horse-calendar/horse.png",
         "sizes": "512x512"
     }
     ]

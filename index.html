@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="manifest" href="manifest.json" />
+        <title>Horse Calendar</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <script src="js/main.js"></script>
+        <link rel="stylesheet" href="css/style.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+        
+        <div>
+            <div>
+                <input id="date" type="date" />
+            </div>
+            <div>
+                <input id="value" type="number" />
+            </div>
+            <div>
+                <input id="month" list="monthList">
+                <datalist id="monthList">
+                    <option value="January">Janeiro</option>
+                    <option value="Febuary">Fevereiro</option>
+                    <option value="March">Mar&ccedil;o</option>
+                    <option value="April">Abril</option>
+                    <option value="May">Maio</option>
+                    <option value="June">Junho</option>
+                    <option value="July">Julho</option>
+                    <option value="August">Agosto</option>
+                    <option value="September">Setembro</option>
+                    <option value="October">Outubro</option>
+                    <option value="November">Novembro</option>
+                    <option value="December">Dezembro</option>
+                </datalist>  
+            </div>
+        </div>
+        <div>
+            <button id="addPayment" type="button">+ PAGAMENTO</button>
+        </div>
+        <div id="result">
+
+        </div>
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+</html>

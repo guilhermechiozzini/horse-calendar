@@ -1,9 +1,9 @@
 const staticHorseCalendar = "horse-calendar"
 const assets = [
-  "/",
-  "/index.html",
-  "/css/style.css",
-  "/js/main.js",
+  "/horse-calendar/",
+  "/horse-calendar/index.html",
+  "/horse-calendar/css/style.css",
+  "/horse-calendar/js/main.js",
 ]
 
 self.addEventListener("install", installEvent => {

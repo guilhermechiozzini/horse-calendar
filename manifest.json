@@ -1,7 +1,7 @@
 {
     "name": "Horse Calendar",
     "short_name": "HorseCalendar",
-    "start_url": "index.html",
+    "start_url": "/horse-calendar/index.html",
     "display": "standalone",
     "background_color": "#fdfdfd",
     "theme_color": "#db4938",

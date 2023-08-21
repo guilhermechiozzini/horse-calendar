@@ -66,7 +66,14 @@ function RestoreData(){
     var result = db.transaction("payments").objectStore("payments").getAll();
     result.onsuccess = function(event) {
         result.result.forEach(element => {
-        console.log(element);
+        var tablePayments = document.getElementById("paymentTable");
+        var row = tablePayments.insertRow();
+        var cell1 = row.interCell(0);
+        var cell2 = row.interCell(1);
+        var cell3 = row.interCell(2);
+        cell1.innerHTML = element.data;
+        cell2.innerHTML = element.mes;
+        cell3.innerHTML = element.valor;
         });
     };
 }

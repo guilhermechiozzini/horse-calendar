@@ -68,9 +68,9 @@ function RestoreData(){
         result.result.forEach(element => {
         var tablePayments = document.getElementById("paymentTable");
         var row = tablePayments.insertRow();
-        var cell1 = row.interCell(0);
-        var cell2 = row.interCell(1);
-        var cell3 = row.interCell(2);
+        var cell1 = row.innerCell(0);
+        var cell2 = row.innerCell(1);
+        var cell3 = row.innerCell(2);
         cell1.innerHTML = element.data;
         cell2.innerHTML = element.mes;
         cell3.innerHTML = element.valor;

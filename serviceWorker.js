@@ -1,4 +1,4 @@
-const staticHorseCalendar = "horse-calendar"
+const staticHorseCalendar = "horse-calendar-2"
 const assets = [
   "/horse-calendar/",
   "/horse-calendar/index.html",

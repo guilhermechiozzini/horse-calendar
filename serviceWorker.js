@@ -1,4 +1,5 @@
-const staticHorseCalendar = "horse-calendar-2"
+const staticHorseCalendar = "horse-calendar"
+const staticHorseCalendarnew = "horse-calendar-2"
 const assets = [
   "/horse-calendar/",
   "/horse-calendar/index.html",
@@ -8,7 +9,7 @@ const assets = [
 
 self.addEventListener("install", installEvent => {
   installEvent.waitUntil(
-    caches.open(staticHorseCalendar).then(cache => {
+    caches.open(staticHorseCalendarnew).then(cache => {
       cache.addAll(assets)
       console.log(assets);
     })
@@ -17,7 +18,8 @@ self.addEventListener("install", installEvent => {
 
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
-      const cache = await caches.open(staticHorseCalendar);
+      // await caches.delete(staticHorseCalendar)
+      const cache = await caches.open(staticHorseCalendarnew);
   
       // Get the resource from the cache.
       const cachedResponse = await cache.match(event.request);

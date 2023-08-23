@@ -9,53 +9,59 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <h1>Horse Calendar</h1>
-        <header> <h2>Pamentos</h2></header>
+        <header>
+            <div class="p-5 text-center bg-light">
+                <h1 class="mb-3">Horse Calendar</h1>
+                <h2 class="mb-3">Pamentos</h2>
+            </div>
+        </header>
         <div class="container">
-        
-        <div>
-            <div>
-                <input id="date" type="date" />
-            </div>
-            <div>
-                <input id="value" type="number" />
-            </div>
-            <div>
-                <input id="month" list="monthList">
-                <datalist id="monthList">
-                    <option value="January">Janeiro</option>
-                    <option value="Febuary">Fevereiro</option>
-                    <option value="March">Mar&ccedil;o</option>
-                    <option value="April">Abril</option>
-                    <option value="May">Maio</option>
-                    <option value="June">Junho</option>
-                    <option value="July">Julho</option>
-                    <option value="August">Agosto</option>
-                    <option value="September">Setembro</option>
-                    <option value="October">Outubro</option>
-                    <option value="November">Novembro</option>
-                    <option value="December">Dezembro</option>
-                </datalist>  
+            <form>
+                <div class="form-group mb-3">
+                    <label for="date" class="form-label">Data de Pagamento</label>
+                    <input id="date" class="form-control" type="date"  />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="value" class="form-label">Valor Pago</label>
+                    <input id="value" class="form-control" type="number" />
+                </div>
+                <div class="form-group mb-3">
+                    <label for="month" class="form-label">Mês da Mensalidade</label>
+                    <input id="month" class="form-control" list="monthList">
+                    <datalist id="monthList">
+                        <option value="January">Janeiro</option>
+                        <option value="Febuary">Fevereiro</option>
+                        <option value="March">Mar&ccedil;o</option>
+                        <option value="April">Abril</option>
+                        <option value="May">Maio</option>
+                        <option value="June">Junho</option>
+                        <option value="July">Julho</option>
+                        <option value="August">Agosto</option>
+                        <option value="September">Setembro</option>
+                        <option value="October">Outubro</option>
+                        <option value="November">Novembro</option>
+                        <option value="December">Dezembro</option>
+                    </datalist>  
+                </div>                
+                <div class="form-group mb-3">
+                    <button id="addPayment" class="btn btn-primary round-6" type="button">+</button>
+                </div>
+            </form>
+            <div id="result">
+                <table class="table" id="paymentTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Data de Pagamento</th>
+                            <th scope="col">Mês do Vencimento</th>
+                            <th scope="col">Valor Pago</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div>
-            <button id="addPayment" type="button">+ PAGAMENTO</button>
-        </div>
-        <div id="result">
-            <table id="paymentTable">
-                <thead>
-                    <tr>
-                        <th>Data de Pagamento</th>
-                        <th>Mês do Vencimento</th>
-                        <th>Valor Pago</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <script src="js/main.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

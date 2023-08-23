@@ -1,0 +1,11 @@
+@import "_import.scss";
+@import "_component.scss";
+
+.round-6 {
+    border-radius: 70%;
+    font-weight: bolder;
+}
+
+.plussign::before {
+    content: "\2795";
+}

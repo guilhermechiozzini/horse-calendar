@@ -20,7 +20,7 @@ self.addEventListener('fetch', event => {
     event.respondWith((async () => {
       caches.keys().then(function(cacheNames) {
         if(cacheName = staticHorseCalendar){
-          await caches.delete(cacheName);
+          caches.delete(cacheName);
         }
       });
       const cache = await caches.open(staticHorseCalendarnew);

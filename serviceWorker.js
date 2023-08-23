@@ -18,7 +18,11 @@ self.addEventListener("install", installEvent => {
 
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
-      await cache.delete(staticHorseCalendar);
+      caches.keys().then(function(cacheNames) {
+        if(cacheName = staticHorseCalendar){
+          await caches.delete(cacheName);
+        }
+      });
       const cache = await caches.open(staticHorseCalendarnew);
   
       // Get the resource from the cache.

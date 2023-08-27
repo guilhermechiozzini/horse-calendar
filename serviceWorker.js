@@ -1,5 +1,5 @@
-const staticHorseCalendar = "horse-calendar-9"
-const staticHorseCalendarnew = "horse-calendar-10"
+const staticHorseCalendar = "horse-calendar-10"
+const staticHorseCalendarnew = "horse-calendar-11"
 const assets = [
   "/horse-calendar/",
   "/horse-calendar/index.html",

@@ -6799,3 +6799,6 @@ textarea.form-control-lg {
     color: #C70000; }
   .row-action .delete-button:before {
     content: "\00d7"; }
+
+.adding-button {
+  background-color: aqua; }

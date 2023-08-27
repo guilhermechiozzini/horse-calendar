@@ -1,3 +1,12 @@
+const today = new Date();
+var dayToday = today.getDate();
+var monthToday = today.getMonth() + 1;
+
+dayToday = dayToday < 10? "0"+ dayToday:dayToday;
+monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
+
+document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
+
 const request = window.indexedDB.open("PaymentCalendar", 3);
 let db;
 request.onerror = (event) => {
@@ -8,21 +17,16 @@ request.onerror = (event) => {
 
 
 request.onupgradeneeded = (event) => {
-    console.log("whatt");
     db = event.target.result;
-    const objectStore = db.createObjectStore("payments", { keyPath: "data" });
+    const objectStore = db.createObjectStore("payments", { keyPath: "mes" });
 
     objectStore.createIndex("data", "data", { unique: false });
     objectStore.createIndex("valor", "valor", { unique: false });
     objectStore.createIndex("mes", "mes", { unique: false });
 
-    
-    objPayment = {"data":"2023-07-15", "valor": 450.00, "mes":"july"};
-
     objectStore.transaction.oncomplete = function(event) {
         // Armazenando valores no novo objectStore.
         var clientesObjectStore = db.transaction("payments", "readwrite").objectStore("payments");
-        clientesObjectStore.add(objPayment);
     }
 };
 request.onsuccess = (event) => {
@@ -36,20 +40,21 @@ request.onsuccess = (event) => {
     };
     request.onsuccess = function(event) {
     // Fazer algo com request.result!
-    console.log(request.result.mes);
+        if (request.result != undefined)
+            console.log(request.result.mes);
     };
     RestoreData();
 };
 
 window.onload = function() {
     var buttonAddPayment = document.getElementById("addPayment");
-
     buttonAddPayment.onclick = function(){
         console.log("clicado");
         let addObject = {};
         addObject.data = document.getElementById("date").value;
         addObject.valor = document.getElementById("value").value;
         addObject.mes = document.getElementById("month").value;
+        console.log(addObject.mes);
         
         transactionAdd = db.transaction("payments", "readwrite");
         clientesObjectStore = transactionAdd.objectStore("payments");
@@ -58,16 +63,22 @@ window.onload = function() {
             console.log("adicionado");
         };
         requestAdd = clientesObjectStore.add(addObject);
+        RestoreData();
     };
 
 };   
 
 function RestoreData(){
+    var tablePayments = document.getElementById("paymentTable");
+    var tBody = tablePayments.getElementsByTagName("tbody")[0];
+    if(tBody != undefined)
+        tablePayments.removeChild(tBody);
+    tBody = tablePayments.createTBody();
+
     var result = db.transaction("payments").objectStore("payments").getAll();
     result.onsuccess = function(event) {
         result.result.forEach(element => {
-        var tablePayments = document.getElementById("paymentTable");
-        var row = tablePayments.insertRow();
+        var row = tBody.insertRow();
         var cell1 = row.insertCell(-1);
         var cell2 = row.insertCell(-1);
         var cell3 = row.insertCell(-1);

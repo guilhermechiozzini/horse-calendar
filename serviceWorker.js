@@ -1,5 +1,5 @@
-const staticHorseCalendar = "horse-calendar-8"
-const staticHorseCalendarnew = "horse-calendar-9"
+const staticHorseCalendar = "horse-calendar-9"
+const staticHorseCalendarnew = "horse-calendar-10"
 const assets = [
   "/horse-calendar/",
   "/horse-calendar/index.html",
@@ -18,11 +18,13 @@ self.addEventListener("install", installEvent => {
 
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
-      caches.keys().then(function(cacheName) {
-        if(cacheName == staticHorseCalendar){
-          console.log("vai deletar cache antigo");
-          caches.delete(cacheName);
-        }
+      caches.keys().then(function(cacheNames) {
+        cacheNames.forEach(function(cacheName){
+          if(cacheName == staticHorseCalendar){
+            console.log("vai deletar cache antigo");
+            caches.delete(cacheName);
+          }
+        })        
       });
       const cache = await caches.open(staticHorseCalendarnew);
   

@@ -6791,3 +6791,11 @@ textarea.form-control-lg {
 
 .plussign::before {
   content: "\2795"; }
+
+.row-action {
+  text-align: center; }
+  .row-action .delete-button {
+    font-weight: bolder;
+    color: #C70000; }
+  .row-action .delete-button:before {
+    content: "\00d7"; }

@@ -6,7 +6,7 @@ dayToday = dayToday < 10? "0"+ dayToday:dayToday;
 monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
-
+document.getElementById("year").value = today.getFullYear();
 const request = window.indexedDB.open("PaymentCalendar", 3);
 let db;
 request.onerror = (event) => {
@@ -18,10 +18,11 @@ request.onerror = (event) => {
 
 request.onupgradeneeded = (event) => {
     db = event.target.result;
-    const objectStore = db.createObjectStore("payments", { keyPath: "mes" });
+    const objectStore = db.createObjectStore("payments", { keyPath:["mes","ano"] });
 
     objectStore.createIndex("data", "data", { unique: false });
     objectStore.createIndex("valor", "valor", { unique: false });
+    objectStore.createIndex("ano", "ano", { unique: false });
     objectStore.createIndex("mes", "mes", { unique: false });
 
     objectStore.transaction.oncomplete = function(event) {
@@ -53,6 +54,7 @@ window.onload = function() {
         let addObject = {};
         addObject.data = document.getElementById("date").value;
         addObject.valor = document.getElementById("value").value;
+        addObject.ano = document.getElementById("year").value;
         addObject.mes = document.getElementById("month").value;
         console.log(addObject.mes);
         
@@ -82,9 +84,14 @@ function RestoreData(){
         var cell1 = row.insertCell(-1);
         var cell2 = row.insertCell(-1);
         var cell3 = row.insertCell(-1);
+        var cell4 = row.insertCell(-1);
+        var cell5 = row.insertCell(-1);
         cell1.innerHTML = element.data;
         cell2.innerHTML = element.mes;
-        cell3.innerHTML = element.valor;
+        cell3.innerHTML = element.ano;
+        cell4.innerHTML = element.valor;
+        cell5.classList.add("row-action");
+        cell5.innerHTML = "<span class=\"delete-button\" onClick=\"DeletePayment('"+element.mes+"', '"+element.ano+"');\"> <span>";
         });
     };
 }
@@ -97,3 +104,12 @@ if ("serviceWorker" in navigator) {
         .catch(err => console.log("service worker not registered", err))
     })
   }
+
+function DeletePayment(month, year) {
+    let transaction = db.transaction("payments", "readwrite");
+    let request = transaction.objectStore("payments").delete([month,year]);
+
+    transaction.oncomplete = () => {
+    RestoreData();    
+  };
+}

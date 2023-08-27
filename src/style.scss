@@ -9,3 +9,15 @@
 .plussign::before {
     content: "\2795";
 }
+
+.row-action {
+    text-align: center;
+    .delete-button {
+        font-weight: bolder;
+        color: #C70000
+    }
+    
+    .delete-button:before {
+        content: "\00d7";
+    }
+}

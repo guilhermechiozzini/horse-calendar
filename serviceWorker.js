@@ -19,7 +19,7 @@ self.addEventListener("install", installEvent => {
 self.addEventListener('fetch', event => {
     event.respondWith((async () => {
       caches.keys().then(function(cacheName) {
-        if(cacheName = staticHorseCalendar){
+        if(cacheName == staticHorseCalendar){
           console.log("vai deletar cache antigo");
           caches.delete(cacheName);
         }

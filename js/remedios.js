@@ -31,19 +31,7 @@ request.onupgradeneeded = (event) => {
     }
 };
 request.onsuccess = (event) => {
-    // console.log("success");
-    // db = event.target.result;
-    // var transaction = db.transaction(["medicine"]);
-    // var objectStore = transaction.objectStore("medicine");
-    // var request = objectStore.get("2023-07-15");
-    // request.onerror = function(event) {
-    // // Tratar erro!
-    // };
-    // request.onsuccess = function(event) {
-    // // Fazer algo com request.result!
-    //     if (request.result != undefined)
-    //         console.log(request.result.mes);
-    // };
+    dbPayment = event.target.result;
     RestoreData();
 };
 

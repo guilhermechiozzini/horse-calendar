@@ -8,7 +8,7 @@ monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
 document.getElementById("year").value = today.getFullYear();
 const request = window.indexedDB.open("HorseCalendar", 3);
-let db;
+let dbPayment;
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
     console.error(`Database error: ${event.target.errorCode}`);
@@ -17,8 +17,8 @@ request.onerror = (event) => {
 
 
 request.onupgradeneeded = (event) => {
-    db = event.target.result;
-    const objectStore = db.createObjectStore("payments", { keyPath:["mes","ano"] });
+    dbPayment = event.target.result;
+    const objectStore = dbPayment.createObjectStore("payments", { keyPath:["mes","ano"] });
 
     objectStore.createIndex("data", "data", { unique: false });
     objectStore.createIndex("valor", "valor", { unique: false });
@@ -27,7 +27,7 @@ request.onupgradeneeded = (event) => {
 
     objectStore.transaction.oncomplete = function(event) {
         // Armazenando valores no novo objectStore.
-        var clientesObjectStore = db.transaction("payments", "readwrite").objectStore("payments");
+        var clientesObjectStore = dbPayment.transaction("payments", "readwrite").objectStore("payments");
     }
 };
 request.onsuccess = (event) => {
@@ -58,7 +58,7 @@ window.onload = function() {
         addObject.mes = document.getElementById("month").value;
         console.log(addObject.mes);
         
-        transactionAdd = db.transaction("payments", "readwrite");
+        transactionAdd = dbPayment.transaction("payments", "readwrite");
         clientesObjectStore = transactionAdd.objectStore("payments");
 
         transactionAdd.oncomplete = function(event){
@@ -77,7 +77,7 @@ function RestoreData(){
         tablePayments.removeChild(tBody);
     tBody = tablePayments.createTBody();
 
-    var result = db.transaction("payments").objectStore("payments").getAll();
+    var result = dbPayment.transaction("payments").objectStore("payments").getAll();
     result.onsuccess = function(event) {
         result.result.forEach(element => {
         var row = tBody.insertRow();
@@ -106,7 +106,7 @@ if ("serviceWorker" in navigator) {
   }
 
 function DeletePayment(month, year) {
-    let transaction = db.transaction("payments", "readwrite");
+    let transaction = dbPayment.transaction("payments", "readwrite");
     let request = transaction.objectStore("payments").delete([month,year]);
 
     transaction.oncomplete = () => {

@@ -8,7 +8,7 @@ monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
 document.getElementById("year").value = today.getFullYear();
 const request = window.indexedDB.open("HorseCalendar", 3);
-let db;
+let dbMedicine;
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
     console.error(`Database error: ${event.target.errorCode}`);
@@ -17,8 +17,8 @@ request.onerror = (event) => {
 
 
 request.onupgradeneeded = (event) => {
-    db = event.target.result;
-    const objectStore = db.createObjectStore("medicine", { keyPath:["mes","ano"] });
+    dbMedicine = event.target.result;
+    const objectStore = dbMedicine.createObjectStore("medicine", { keyPath:["mes","ano"] });
 
     objectStore.createIndex("data", "data", { unique: false });
     objectStore.createIndex("valor", "valor", { unique: false });
@@ -27,7 +27,7 @@ request.onupgradeneeded = (event) => {
 
     objectStore.transaction.oncomplete = function(event) {
         // Armazenando valores no novo objectStore.
-        var clientesObjectStore = db.transaction("medicine", "readwrite").objectStore("medicine");
+        var clientesObjectStore = dbMedicine.transaction("medicine", "readwrite").objectStore("medicine");
     }
 };
 request.onsuccess = (event) => {
@@ -58,7 +58,7 @@ window.onload = function() {
         addObject.mes = document.getElementById("month").value;
         console.log(addObject.mes);
         
-        transactionAdd = db.transaction("medicine", "readwrite");
+        transactionAdd = dbMedicine.transaction("medicine", "readwrite");
         clientesObjectStore = transactionAdd.objectStore("medicine");
 
         transactionAdd.oncomplete = function(event){
@@ -77,7 +77,7 @@ function RestoreData(){
         tablemedicine.removeChild(tBody);
     tBody = tablemedicine.createTBody();
 
-    var result = db.transaction("medicine").objectStore("medicine").getAll();
+    var result = dbMedicine.transaction("medicine").objectStore("medicine").getAll();
     result.onsuccess = function(event) {
         result.result.forEach(element => {
         var row = tBody.insertRow();
@@ -106,7 +106,7 @@ if ("serviceWorker" in navigator) {
   }
 
 function DeleteMedicine(month, year) {
-    let transaction = db.transaction("medicine", "readwrite");
+    let transaction = dbMedicine.transaction("medicine", "readwrite");
     let request = transaction.objectStore("medicine").delete([month,year]);
 
     transaction.oncomplete = () => {

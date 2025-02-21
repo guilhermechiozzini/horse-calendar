@@ -31,7 +31,7 @@ request.onupgradeneeded = (event) => {
     }
 };
 request.onsuccess = (event) => {
-    dbPayment = event.target.result;
+    dbMedicine = event.target.result;
     RestoreData();
 };
 

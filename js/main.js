@@ -95,11 +95,11 @@ function RestoreData(){
         });
     };
 }
-const currentUrl = window.location.href;
+const originUrl = window.location.origin;
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
       navigator.serviceWorker
-        .register(currentUrl + "serviceWorker.js")
+        .register(originUrl + "/horse-calendar/serviceWorker.js")
         .then(res => console.log("service worker registered"))
         .catch(err => console.log("service worker not registered", err))
     })

@@ -18,7 +18,7 @@ request.onerror = (event) => {
 
 request.onupgradeneeded = (event) => {
     db = event.target.result;
-    const objectStore = db.createObjectStore("payments", { keyPath:["mes","ano"] });
+    const objectStore = db.createObjectStore("medicine", { keyPath:["mes","ano"] });
 
     objectStore.createIndex("data", "data", { unique: false });
     objectStore.createIndex("valor", "valor", { unique: false });
@@ -27,14 +27,14 @@ request.onupgradeneeded = (event) => {
 
     objectStore.transaction.oncomplete = function(event) {
         // Armazenando valores no novo objectStore.
-        var clientesObjectStore = db.transaction("payments", "readwrite").objectStore("payments");
+        var clientesObjectStore = db.transaction("medicine", "readwrite").objectStore("medicine");
     }
 };
 request.onsuccess = (event) => {
     console.log("success");
     db = event.target.result;
-    var transaction = db.transaction(["payments"]);
-    var objectStore = transaction.objectStore("payments");
+    var transaction = db.transaction(["medicine"]);
+    var objectStore = transaction.objectStore("medicine");
     var request = objectStore.get("2023-07-15");
     request.onerror = function(event) {
     // Tratar erro!
@@ -58,8 +58,8 @@ window.onload = function() {
         addObject.mes = document.getElementById("month").value;
         console.log(addObject.mes);
         
-        transactionAdd = db.transaction("payments", "readwrite");
-        clientesObjectStore = transactionAdd.objectStore("payments");
+        transactionAdd = db.transaction("medicine", "readwrite");
+        clientesObjectStore = transactionAdd.objectStore("medicine");
 
         transactionAdd.oncomplete = function(event){
             console.log("adicionado");
@@ -71,13 +71,13 @@ window.onload = function() {
 };   
 
 function RestoreData(){
-    var tablePayments = document.getElementById("paymentTable");
-    var tBody = tablePayments.getElementsByTagName("tbody")[0];
+    var tablemedicine = document.getElementById("paymentTable");
+    var tBody = tablemedicine.getElementsByTagName("tbody")[0];
     if(tBody != undefined)
-        tablePayments.removeChild(tBody);
-    tBody = tablePayments.createTBody();
+        tablemedicine.removeChild(tBody);
+    tBody = tablemedicine.createTBody();
 
-    var result = db.transaction("payments").objectStore("payments").getAll();
+    var result = db.transaction("medicine").objectStore("medicine").getAll();
     result.onsuccess = function(event) {
         result.result.forEach(element => {
         var row = tBody.insertRow();
@@ -95,19 +95,19 @@ function RestoreData(){
         });
     };
 }
-const currentUrl = window.location.href;
+const originUrl = window.location.origin;
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
       navigator.serviceWorker
-        .register(currentUrl + "serviceWorker.js")
+        .register(originUrl + "/horse-calendar/serviceWorker.js")
         .then(res => console.log("service worker registered"))
         .catch(err => console.log("service worker not registered", err))
     })
   }
 
 function DeletePayment(month, year) {
-    let transaction = db.transaction("payments", "readwrite");
-    let request = transaction.objectStore("payments").delete([month,year]);
+    let transaction = db.transaction("medicine", "readwrite");
+    let request = transaction.objectStore("medicine").delete([month,year]);
 
     transaction.oncomplete = () => {
     RestoreData();    

@@ -5,6 +5,9 @@ const assets = [
   "/horse-calendar/index.html",
   "/horse-calendar/css/style.css",
   "/horse-calendar/js/main.js",
+  "/horse-calendar/js/remedios.js",
+  "/horse-calendar/remedios/index.html",
+  "/horse-calendar/pagamentos/index.html",
 ]
 
 self.addEventListener("install", installEvent => {

@@ -7,7 +7,7 @@ monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
 document.getElementById("year").value = today.getFullYear();
-const request = window.indexedDB.open("HorseCalendar", 4);
+const request = window.indexedDB.open("HorseCalendar", 5);
 let dbMedicine;
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");

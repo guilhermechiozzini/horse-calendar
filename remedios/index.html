@@ -15,13 +15,13 @@
         <header>
             <div class="p-5 text-center bg-light">
                 <h1 class="mb-3">Horse Calendar!</h1>
-                <h2 class="mb-3">Pamentos</h2>
+                <h2 class="mb-3">Remédios</h2>
             </div>
         </header>
         <div class="container">
             <form>
                 <div class="form-group mb-3">
-                    <label for="date" class="form-label">Data de Pagamento</label>
+                    <label for="date" class="form-label">Data do Remédio</label>
                     <input id="date" class="form-control" type="date"  />
                 </div>
                 <div class="form-group mb-3">
@@ -33,7 +33,7 @@
                     <input id="year" class="form-control" type="number" />
                 </div>
                 <div class="form-group mb-3">
-                    <label for="month" class="form-label">Mês da Mensalidade</label>
+                    <label for="month" class="form-label">Mês da Aplicação</label>
                     <input id="month" class="form-control" list="monthList">
                     <datalist id="monthList">
                         <option value="January">Janeiro</option>
@@ -51,14 +51,14 @@
                     </datalist>  
                 </div>                
                 <div class="form-group mb-3">
-                    <button id="addPayment" class="btn btn-primary round-6 adding-button" type="button">+</button>
+                    <button id="addMedicine" class="btn btn-primary round-6 adding-button" type="button">+</button>
                 </div>
             </form>
             <div id="result">
-                <table class="table" id="paymentTable">
+                <table class="table" id="medicineTable">
                     <thead>
                         <tr>
-                            <th scope="col">Data de Pagamento</th>
+                            <th scope="col">Data da Aplicação</th>
                             <th scope="col">Mês do Vencimento</th>
                             <th scope="col">Ano Base</th>
                             <th scope="col">Valor Pago</th>

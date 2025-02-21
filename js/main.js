@@ -7,7 +7,7 @@ monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
 document.getElementById("year").value = today.getFullYear();
-const request = window.indexedDB.open("PaymentCalendar", 3);
+const request = window.indexedDB.open("HorseCalendar", 3);
 let db;
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
@@ -31,19 +31,19 @@ request.onupgradeneeded = (event) => {
     }
 };
 request.onsuccess = (event) => {
-    console.log("success");
-    db = event.target.result;
-    var transaction = db.transaction(["payments"]);
-    var objectStore = transaction.objectStore("payments");
-    var request = objectStore.get("2023-07-15");
-    request.onerror = function(event) {
-    // Tratar erro!
-    };
-    request.onsuccess = function(event) {
-    // Fazer algo com request.result!
-        if (request.result != undefined)
-            console.log(request.result.mes);
-    };
+    // console.log("success");
+    // db = event.target.result;
+    // var transaction = db.transaction(["payments"]);
+    // var objectStore = transaction.objectStore("payments");
+    // var request = objectStore.get("2023-07-15");
+    // request.onerror = function(event) {
+    // // Tratar erro!
+    // };
+    // request.onsuccess = function(event) {
+    // // Fazer algo com request.result!
+    //     if (request.result != undefined)
+    //         console.log(request.result.mes);
+    // };
     RestoreData();
 };
 

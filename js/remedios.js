@@ -7,7 +7,7 @@ monthToday = monthToday < 10? "0"+ monthToday:dayTmonthTodayoday;
 
 document.getElementById("date").value = today.getFullYear() + "-" + monthToday + "-" + dayToday; 
 document.getElementById("year").value = today.getFullYear();
-const request = window.indexedDB.open("PaymentCalendar", 3);
+const request = window.indexedDB.open("HorseCalendar", 3);
 let db;
 request.onerror = (event) => {
     console.error("Why didn't you allow my web app to use IndexedDB?!");
@@ -31,25 +31,25 @@ request.onupgradeneeded = (event) => {
     }
 };
 request.onsuccess = (event) => {
-    console.log("success");
-    db = event.target.result;
-    var transaction = db.transaction(["medicine"]);
-    var objectStore = transaction.objectStore("medicine");
-    var request = objectStore.get("2023-07-15");
-    request.onerror = function(event) {
-    // Tratar erro!
-    };
-    request.onsuccess = function(event) {
-    // Fazer algo com request.result!
-        if (request.result != undefined)
-            console.log(request.result.mes);
-    };
+    // console.log("success");
+    // db = event.target.result;
+    // var transaction = db.transaction(["medicine"]);
+    // var objectStore = transaction.objectStore("medicine");
+    // var request = objectStore.get("2023-07-15");
+    // request.onerror = function(event) {
+    // // Tratar erro!
+    // };
+    // request.onsuccess = function(event) {
+    // // Fazer algo com request.result!
+    //     if (request.result != undefined)
+    //         console.log(request.result.mes);
+    // };
     RestoreData();
 };
 
 window.onload = function() {
-    var buttonAddPayment = document.getElementById("addPayment");
-    buttonAddPayment.onclick = function(){
+    var buttonAddMedicine = document.getElementById("addMedicine");
+    buttonAddMedicine.onclick = function(){
         console.log("clicado");
         let addObject = {};
         addObject.data = document.getElementById("date").value;
@@ -71,7 +71,7 @@ window.onload = function() {
 };   
 
 function RestoreData(){
-    var tablemedicine = document.getElementById("paymentTable");
+    var tablemedicine = document.getElementById("medicineTable");
     var tBody = tablemedicine.getElementsByTagName("tbody")[0];
     if(tBody != undefined)
         tablemedicine.removeChild(tBody);
@@ -91,7 +91,7 @@ function RestoreData(){
         cell3.innerHTML = element.ano;
         cell4.innerHTML = element.valor;
         cell5.classList.add("row-action");
-        cell5.innerHTML = "<span class=\"delete-button\" onClick=\"DeletePayment('"+element.mes+"', '"+element.ano+"');\"> <span>";
+        cell5.innerHTML = "<span class=\"delete-button\" onClick=\"DeleteMedicine('"+element.mes+"', '"+element.ano+"');\"> <span>";
         });
     };
 }
@@ -105,7 +105,7 @@ if ("serviceWorker" in navigator) {
     })
   }
 
-function DeletePayment(month, year) {
+function DeleteMedicine(month, year) {
     let transaction = db.transaction("medicine", "readwrite");
     let request = transaction.objectStore("medicine").delete([month,year]);
 

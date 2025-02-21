@@ -17,6 +17,7 @@ request.onerror = (event) => {
 
 
 request.onupgradeneeded = (event) => {
+    console.log("aqui");
     dbPayment = event.target.result;
     const objectStore = dbPayment.createObjectStore("payments", { keyPath:["mes","ano"] });
 
